@@ -1,5 +1,5 @@
 // selectors
-
+export const getAllPosts = (state: any) => state.posts
 // actions
 
 const createActionName = (actionName: string): string =>

@@ -1,4 +1,4 @@
-interface Post {
+export interface PostInterface {
   id: string
   title: string
   shortDescription: string
@@ -7,11 +7,11 @@ interface Post {
   author: string
 }
 
-const initialState: { posts: Post[] } = {
+const initialState: { posts: PostInterface[] } = {
   posts: [
     {
       id: '1',
-      title: 'Article title',
+      title: 'First title',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
       publishedDate: '10-04-2021',
@@ -19,7 +19,7 @@ const initialState: { posts: Post[] } = {
     },
     {
       id: '2',
-      title: 'Article title',
+      title: 'Second title',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
       publishedDate: '05-07-2023',
@@ -27,7 +27,7 @@ const initialState: { posts: Post[] } = {
     },
     {
       id: '3',
-      title: 'Article title',
+      title: 'Third title',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
       publishedDate: '01-11-2022',

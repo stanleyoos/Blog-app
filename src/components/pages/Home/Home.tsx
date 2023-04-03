@@ -1,5 +1,7 @@
+import AllPosts from '../../features/AllPosts/AllPosts'
+
 const Home = () => {
-  return <h1>Home</h1>
+  return <AllPosts />
 }
 
 export default Home
