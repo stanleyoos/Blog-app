@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import './App.css'
+import About from './components/pages/About/About'
+import Home from './components/pages/Home/Home'
+import SinglePost from './components/pages/SinglePost/SinglePost'
+import PostAdd from './components/pages/PostAdd/PostAdd'
+import PostEdit from './components/pages/PostEdit/PostEdit'
+import NotFound from './components/pages/NotFound/NotFound'
+import { Container } from 'react-bootstrap'
+import Header from './components/views/Header/Header'
+import Footer from './components/views/Footer/Footer'
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/post/add" element={<PostAdd />} />
+        <Route path="/post/edit/:id" element={<PostEdit />} />
+        <Route path="/post/:id" element={<SinglePost />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Container>
+  )
 }
 
-export default App;
+export default App
