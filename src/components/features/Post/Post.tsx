@@ -7,7 +7,6 @@ const Post = ({
   id,
   title,
   shortDescription,
-  content,
   publishedDate,
   author,
 }: PostInterface) => {
