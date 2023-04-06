@@ -1,4 +1,5 @@
 import shortid from 'shortid'
+import { PostInterface } from '../initialState'
 
 // selectors
 export const getAllPosts = (state: any) => state.posts
@@ -17,14 +18,16 @@ const DELETE_POST = createActionName('DELETE_POST')
 const ADD_POST = createActionName('ADD_POST')
 const EDIT_POST = createActionName('EDIT_POST')
 
-const postsReducer = (statePart = [], action: any): any => {
+const postsReducer = (statePart: PostInterface[] = [], action: any): any => {
   switch (action.type) {
     case DELETE_POST:
       return statePart.filter((post: any) => post.id !== action.payload)
     case ADD_POST:
       return [...statePart, { ...action.payload, id: shortid() }]
     case EDIT_POST:
-      return statePart
+      return statePart.map((post) =>
+        post.id === action.payload.id ? { ...action.payload } : post
+      )
     default:
       return statePart
   }

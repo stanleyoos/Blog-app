@@ -4,9 +4,10 @@ import Form from 'react-bootstrap/Form'
 import Button from '../../common/Button/Button'
 import { PostInterface } from '../../../redux/initialState'
 
-interface PostFormInterface extends PostInterface {
+interface PostFormInterface {
   action: ({}: PostInterface) => void
   actionText: string
+  post?: PostInterface
 }
 
 const PostForm = ({ action, actionText, ...props }: PostFormInterface) => {
