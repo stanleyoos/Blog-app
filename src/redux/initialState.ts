@@ -1,10 +1,10 @@
 export interface PostInterface {
-  id: string
-  title: string
-  shortDescription: string
-  content: string
-  publishedDate: string
-  author: string
+  id?: string
+  title?: string
+  shortDescription?: string
+  content?: string
+  publishedDate?: string
+  author?: string
 }
 
 const initialState: { posts: PostInterface[] } = {
