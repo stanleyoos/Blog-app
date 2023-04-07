@@ -10,18 +10,18 @@ interface PostFormInterface {
   post?: PostInterface
 }
 
-const PostForm = ({ action, actionText, ...props }: PostFormInterface) => {
-  const [title, setTitle] = useState(props.title || '')
-  const [author, setAuthor] = useState(props.author || '')
-  const [publishedDate, setPublishedDate] = useState(props.publishedDate || '')
+const PostForm = ({ action, actionText, post }: PostFormInterface) => {
+  const [title, setTitle] = useState(post?.title || '')
+  const [author, setAuthor] = useState(post?.author || '')
+  const [publishedDate, setPublishedDate] = useState(post?.publishedDate || '')
   const [shortDescription, setShortDescription] = useState(
-    props.shortDescription || ''
+    post?.shortDescription || ''
   )
-  const [content, setContent] = useState(props.content || '')
+  const [content, setContent] = useState(post?.content || '')
 
   const handleSubmit = () => {
-    console.log('Submit')
     action({
+      id: post?.id,
       title,
       author,
       publishedDate,
