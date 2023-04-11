@@ -15,11 +15,10 @@ interface PostFormInterface {
 }
 
 const PostForm = ({ action, actionText, post }: PostFormInterface) => {
-  //const [startDate, setStartDate] = useState(new Date())
   const [title, setTitle] = useState(post?.title || '')
   const [author, setAuthor] = useState(post?.author || '')
-  const [publishedDate, setPublishedDate] = useState<Date | null>(
-    new Date(post?.publishedDate || '')
+  const [publishedDate, setPublishedDate] = useState<Date>(
+    new Date(post?.publishedDate || new Date())
   )
   const [shortDescription, setShortDescription] = useState(
     post?.shortDescription || ''
@@ -55,7 +54,7 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
 
         <DatePicker
           selected={publishedDate}
-          onChange={(date) => setPublishedDate(date)}
+          onChange={(date) => setPublishedDate(date as Date)}
         />
         <label>Short description</label>
         <Form.Control

@@ -3,7 +3,7 @@ export interface PostInterface {
   title: string
   shortDescription: string
   content: string
-  publishedDate: Date | string | null
+  publishedDate: Date
   author: string
 }
 
@@ -14,7 +14,7 @@ const initialState: { posts: PostInterface[] } = {
       title: 'First title',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: new Date('02-01-2023'),
+      publishedDate: new Date('04/11/2023'),
       author: 'John Doe',
     },
     {
@@ -22,7 +22,7 @@ const initialState: { posts: PostInterface[] } = {
       title: 'Second title',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: new Date('12-04-2019'),
+      publishedDate: new Date('09/02/2021'),
       author: 'John Doe',
     },
     {
@@ -30,7 +30,7 @@ const initialState: { posts: PostInterface[] } = {
       title: 'Third title',
       shortDescription: 'Short description of the article...',
       content: 'Main content of the article',
-      publishedDate: new Date('07-05-2021'),
+      publishedDate: new Date('01/22/2020'),
       author: 'John Doe',
     },
   ],
