@@ -51,7 +51,9 @@ const SinglePost = () => {
             <strong>Published: </strong>
             {post.publishedDate}
           </p>
-          <Card.Text className="my-4">{post.content}</Card.Text>
+          <Card.Text className="my-4">
+            <p dangerouslySetInnerHTML={{ __html: post.content }} />
+          </Card.Text>
         </Card.Body>
       </Card>
 

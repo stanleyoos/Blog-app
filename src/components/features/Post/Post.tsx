@@ -2,6 +2,7 @@ import { PostInterface } from '../../../redux/initialState'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
+import dateToStr from '../../../utils/dateToStr'
 
 const Post = ({
   id,
@@ -21,7 +22,7 @@ const Post = ({
         </p>
         <p className="m-0 p-0">
           <strong>Published: </strong>
-          {publishedDate}
+          {dateToStr(publishedDate)}
         </p>
         <Card.Text className="mb-4">{shortDescription}</Card.Text>
         <Link className="text-decoration-none" to={`/post/${id}`}>

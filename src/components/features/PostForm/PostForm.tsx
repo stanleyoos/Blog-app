@@ -3,6 +3,10 @@ import TextInput from '../../common/TextInput/TextInput'
 import Form from 'react-bootstrap/Form'
 import Button from '../../common/Button/Button'
 import { PostInterface } from '../../../redux/initialState'
+import ReactQuill from 'react-quill'
+import DatePicker from 'react-datepicker'
+import 'react-quill/dist/quill.snow.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 interface PostFormInterface {
   action: ({}: PostInterface) => void
@@ -11,9 +15,12 @@ interface PostFormInterface {
 }
 
 const PostForm = ({ action, actionText, post }: PostFormInterface) => {
+  //const [startDate, setStartDate] = useState(new Date())
   const [title, setTitle] = useState(post?.title || '')
   const [author, setAuthor] = useState(post?.author || '')
-  const [publishedDate, setPublishedDate] = useState(post?.publishedDate || '')
+  const [publishedDate, setPublishedDate] = useState<Date | null>(
+    new Date(post?.publishedDate || '')
+  )
   const [shortDescription, setShortDescription] = useState(
     post?.shortDescription || ''
   )
@@ -46,10 +53,9 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
         />
         <label>Published</label>
 
-        <TextInput
-          placeholder='Enter date in format "DD-MM-YYYY"'
-          value={publishedDate}
-          onChange={(e: any) => setPublishedDate(e.target.value)}
+        <DatePicker
+          selected={publishedDate}
+          onChange={(date) => setPublishedDate(date)}
         />
         <label>Short description</label>
         <Form.Control
@@ -61,13 +67,12 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
           onChange={(e: any) => setShortDescription(e.target.value)}
         />
         <label>Main description</label>
-        <Form.Control
-          as="textarea"
+
+        <ReactQuill
           className="mb-4"
-          placeholder="Leave main content here"
-          style={{ height: '120px' }}
+          theme="snow"
           value={content}
-          onChange={(e: any) => setContent(e.target.value)}
+          onChange={setContent}
         />
         <Button onClick={handleSubmit}>{actionText}</Button>
       </div>
