@@ -26,14 +26,14 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
     post?.shortDescription || ''
   )
   const [content, setContent] = useState(post?.content || '')
-  const [contentError, setContentError] = useState(true)
+  const [contentError, setContentError] = useState(false)
   
 
   const handleSubmit = () => {
     
-    if (content !== '') setContentError(false)
+    content == '' ? setContentError(true) : setContentError(false)
     
-    if (!contentError ) {
+    if (contentError ) {
       action({
         id: post?.id,
         title,
