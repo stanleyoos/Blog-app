@@ -11,7 +11,6 @@ const Post = ({
   publishedDate,
   author,
 }: PostInterface) => {
-  console.log(new Date(2023, 0, 5))
   return (
     <Card className="mx-3 my-2 " style={{ width: '22rem' }}>
       <Card.Body>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import TextInput from '../../common/TextInput/TextInput'
 import Form from 'react-bootstrap/Form'
 import Button from '../../common/Button/Button'
@@ -7,6 +8,7 @@ import ReactQuill from 'react-quill'
 import DatePicker from 'react-datepicker'
 import 'react-quill/dist/quill.snow.css'
 import 'react-datepicker/dist/react-datepicker.css'
+import styles from './PostForm.module.scss'
 
 interface PostFormInterface {
   action: ({}: PostInterface) => void
@@ -24,58 +26,77 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
     post?.shortDescription || ''
   )
   const [content, setContent] = useState(post?.content || '')
+  const [contentError, setContentError] = useState(true)
+  
 
   const handleSubmit = () => {
-    action({
-      id: post?.id,
-      title,
-      author,
-      publishedDate,
-      shortDescription,
-      content,
-    })
+    
+    if (content !== '') setContentError(false)
+    
+    if (!contentError ) {
+      action({
+        id: post?.id,
+        title,
+        author,
+        publishedDate,
+        shortDescription,
+        content,
+      })
+    }
   }
-  return (
-    <div className="d-flex justify-content-center">
-      <div className="d-block">
-        <label>Title</label>
-        <TextInput
-          placeholder="Enter title"
-          value={title}
-          onChange={(e: any) => setTitle(e.target.value)}
-        />
-        <label>Author</label>
-        <TextInput
-          placeholder="Enter author"
-          value={author}
-          onChange={(e: any) => setAuthor(e.target.value)}
-        />
-        <label>Published</label>
 
+  const {register, handleSubmit: validate, formState: {errors}} = useForm()
+
+  return (
+    <form className="d-flex justify-content-center">
+      <div className="d-block">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+          className='mb-2'
+            {...register("title", { required: true, minLength: 3 })}
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            type="text" 
+            placeholder="Enter title"
+          />
+          {errors.title && <span className={styles.errorSpan}>This field is required and must be at least 3 characters long</span>}
+        
+        <Form.Label className='mt-4 d-block'>Author</Form.Label>
+        <Form.Control
+            {...register("author", {required: true, minLength: 3} )}
+            placeholder="Enter author"
+            value={author}
+            onChange={(e: any) => setAuthor(e.target.value)}
+          />
+        {errors.author && <span className={styles.errorSpan}>This field is required and must be at least 3 characters long</span>}
+        <Form.Label className='mt-4 d-flex'>Published</Form.Label>
         <DatePicker
           selected={publishedDate}
           onChange={(date) => setPublishedDate(date as Date)}
+          
         />
-        <label>Short description</label>
+        
+        <Form.Label className='mt-4 d-block'>Short description</Form.Label>
         <Form.Control
+          {...register('shortDescription', {required: true, minLength: 20})}
           as="textarea"
-          className="mb-4"
           placeholder="Leave short description here"
           style={{ height: '120px' }}
           value={shortDescription}
           onChange={(e: any) => setShortDescription(e.target.value)}
         />
-        <label>Main description</label>
-
+        {errors.shortDescription && <span className={styles.errorSpan}>This field is required and must be at least 20 characters long</span>}
+        
+        <Form.Label className=' d-block mt-4'>Main description</Form.Label>
         <ReactQuill
-          className="mb-4"
           theme="snow"
           value={content}
           onChange={setContent}
         />
-        <Button onClick={handleSubmit}>{actionText}</Button>
+        {contentError && <span className={styles.errorSpan}>This field can not be empty!</span>}
+        <Button  onClick={validate(handleSubmit)}>{actionText}</Button>
       </div>
-    </div>
+    </form>
   )
 }
 

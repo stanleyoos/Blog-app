@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import { useState } from 'react'
 import { deletePost } from '../../../redux/subreducers/postReducer'
+import dateToStr from '../../../utils/dateToStr'
 
 const SinglePost = () => {
   const dispatch = useDispatch()
@@ -49,7 +50,7 @@ const SinglePost = () => {
           </p>
           <p className="m-0 p-0">
             <strong>Published: </strong>
-            {post.publishedDate}
+            {dateToStr(post.publishedDate)}
           </p>
           <Card.Text className="my-4">
             <p dangerouslySetInnerHTML={{ __html: post.content }} />
