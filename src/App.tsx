@@ -9,6 +9,8 @@ import NotFound from './components/pages/NotFound/NotFound'
 import { Container } from 'react-bootstrap'
 import Header from './components/views/Header/Header'
 import Footer from './components/views/Footer/Footer'
+import Categories from './components/pages/Categories/Categories'
+import Category from './components/pages/Category/Category'
 
 function App(): JSX.Element {
   return (
@@ -17,6 +19,8 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/category/:categoryName" element={<Category />} />
         <Route path="/post/add" element={<PostAdd />} />
         <Route path="/post/edit/:id" element={<PostEdit />} />
         <Route path="/post/:id" element={<SinglePost />} />

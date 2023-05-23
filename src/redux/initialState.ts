@@ -5,9 +5,15 @@ export interface PostInterface {
   content: string
   publishedDate: Date
   author: string
+  category: string
 }
 
-const initialState: { posts: PostInterface[] } = {
+export interface CategoryInterface {
+  id: number,
+  name: string
+}
+
+const initialState: { posts: PostInterface[], categories: CategoryInterface[] } = {
   posts: [
     {
       id: '1',
@@ -16,6 +22,7 @@ const initialState: { posts: PostInterface[] } = {
       content: 'Main content of the article',
       publishedDate: new Date('04/11/2023'),
       author: 'John Doe',
+      category: "Sport"
     },
     {
       id: '2',
@@ -24,6 +31,7 @@ const initialState: { posts: PostInterface[] } = {
       content: 'Main content of the article',
       publishedDate: new Date('09/02/2021'),
       author: 'John Doe',
+      category: "Movies"
     },
     {
       id: '3',
@@ -32,8 +40,69 @@ const initialState: { posts: PostInterface[] } = {
       content: 'Main content of the article',
       publishedDate: new Date('01/22/2020'),
       author: 'John Doe',
+      category: "Music"
+    },
+    {
+      id: '4',
+      title: 'Fourth title',
+      shortDescription: 'Short description of the article...',
+      content: 'Main content of the article',
+      publishedDate: new Date('01/22/2023'),
+      author: 'John Doe',
+      category: "Computers"
+    },
+    {
+      id: '5',
+      title: 'Title',
+      shortDescription: 'Short description of the article...',
+      content: 'Main content of the article',
+      publishedDate: new Date('01/22/2020'),
+      author: 'John Doe',
+      category: "Computers"
+    },
+    {
+      id: '6',
+      title: 'Title',
+      shortDescription: 'Short description of the article...',
+      content: 'Main content of the article',
+      publishedDate: new Date('01/22/2020'),
+      author: 'John Doe',
+      category: "Music"
+    },
+    {
+      id: '7',
+      title: 'Title',
+      shortDescription: 'Short description of the article...',
+      content: 'Main content of the article',
+      publishedDate: new Date('01/22/2020'),
+      author: 'John Doe',
+      category: "Computers"
+    },
+    {
+      id: '8',
+      title: 'Title',
+      shortDescription: 'Short description of the article...',
+      content: 'Main content of the article',
+      publishedDate: new Date('01/22/2020'),
+      author: 'John Doe',
+      category: "Music"
+    },
+    {
+      id: '9',
+      title: 'Title',
+      shortDescription: 'Short description of the article...',
+      content: 'Main content of the article',
+      publishedDate: new Date('01/22/2020'),
+      author: 'John Doe',
+      category: "Music"
     },
   ],
+  categories: [
+    {id: 1, name: "Sport"},
+    {id: 2, name: "Movies"},
+    {id: 3, name: "Music"},
+    {id:4, name: "Computers"}
+  ]
 }
 
 export default initialState

@@ -44,13 +44,17 @@ const SinglePost = () => {
               </Button>
             </div>
           </div>
-          <p className="mb-1 p-0">
+          <p className="m-0 p-0">
             <strong>Author: </strong>
             {post.author}
           </p>
-          <p className="m-0 p-0">
+          <p className="my-1 p-0">
             <strong>Published: </strong>
             {dateToStr(post.publishedDate)}
+          </p>
+          <p className="m-0 p-0">
+            <strong>Category: </strong>
+            {post.category}
           </p>
           <Card.Text className="my-4">
             <p dangerouslySetInnerHTML={{ __html: post.content }} />

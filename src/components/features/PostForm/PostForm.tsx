@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import TextInput from '../../common/TextInput/TextInput'
 import Form from 'react-bootstrap/Form'
 import Button from '../../common/Button/Button'
-import { PostInterface } from '../../../redux/initialState'
+import { CategoryInterface, PostInterface } from '../../../redux/initialState'
 import ReactQuill from 'react-quill'
 import DatePicker from 'react-datepicker'
 import 'react-quill/dist/quill.snow.css'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './PostForm.module.scss'
+import { useSelector } from 'react-redux'
+import { getAllCategories } from '../../../redux/subreducers/categoryReducer'
 
 interface PostFormInterface {
   action: ({}: PostInterface) => void
@@ -27,13 +28,15 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
   )
   const [content, setContent] = useState(post?.content || '')
   const [contentError, setContentError] = useState(false)
-  
+  const [category, setCategory] = useState(post?.category || 'undefined')
+
+  const categories = useSelector(getAllCategories)
 
   const handleSubmit = () => {
     
-    content == '' ? setContentError(true) : setContentError(false)
     
-    if (contentError ) {
+    if (content !== '' ) {
+      setContentError(false)
       action({
         id: post?.id,
         title,
@@ -41,7 +44,11 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
         publishedDate,
         shortDescription,
         content,
+        category
       })
+    }
+    else {
+      setContentError(true)
     }
   }
 
@@ -69,6 +76,11 @@ const PostForm = ({ action, actionText, post }: PostFormInterface) => {
             onChange={(e: any) => setAuthor(e.target.value)}
           />
         {errors.author && <span className={styles.errorSpan}>This field is required and must be at least 3 characters long</span>}
+        <Form.Label className='mt-4 d-block'>Category</Form.Label>
+        
+        <Form.Select  value={category} onChange={(e) => setCategory(e.target.value)}>
+          {categories.map((category: CategoryInterface) => (<option key={category.id} value={category.name}>{category.name}</option>))}
+        </Form.Select>
         <Form.Label className='mt-4 d-flex'>Published</Form.Label>
         <DatePicker
           selected={publishedDate}

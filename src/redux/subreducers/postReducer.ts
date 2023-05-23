@@ -5,6 +5,7 @@ import { PostInterface } from '../initialState'
 export const getAllPosts = (state: any) => state.posts
 export const getSinglePost = (state: any, id: string | undefined) =>
   state.posts.find((post: any) => post.id === id)
+export const getAllPostsByCategory = (state: any, categoryName: string | undefined) => state.posts.filter((post: any) => post.category.toLowerCase() === categoryName)
 
 // actions
 export const deletePost = (payload: any) => ({ type: DELETE_POST, payload })

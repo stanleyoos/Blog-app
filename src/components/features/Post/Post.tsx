@@ -10,6 +10,7 @@ const Post = ({
   shortDescription,
   publishedDate,
   author,
+  category
 }: PostInterface) => {
   return (
     <Card className="mx-3 my-2 " style={{ width: '22rem' }}>
@@ -23,6 +24,10 @@ const Post = ({
         <p className="m-0 p-0">
           <strong>Published: </strong>
           {dateToStr(publishedDate)}
+        </p>
+        <p className="my-1 p-0">
+          <strong>Category: </strong>
+          {category}
         </p>
         <Card.Text className="mb-4">{shortDescription}</Card.Text>
         <Link className="text-decoration-none" to={`/post/${id}`}>
